@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cursos', function(Blueprint $table){
-            $table->id();
-            $table->string('name');
-            $table->text('descripcion');
-            $table->timestamps(); //
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('name', '150')->nullable()->change();
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('name', 255)->nullable(false)->change();
+        });
     }
 };
