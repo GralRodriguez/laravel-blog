@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CursoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,11 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    //return view('welcome');
-    return "Bienvenido a la pagina principal";
-});
+Route::get('/', HomeController::class);
 
-Route::get('cursos', function(){
-    return "Bienvenido a la pagina cursos";
+// Tutorial Laravel 9 de YouTube con CodersFree
+// Pruebas con routes en javascript
+Route::controller(CursoController::class)->group(function(){
+    Route::get('cursos', 'index');
+    Route::get('cursos/create', 'create');
+    Route::get('cursos/{curso}', 'show');
 });
+/*
+Route::get('cursos/{curso}/{categoria?}', function($curso, $categoria = "") {
+    $mensaje = null;
+
+    if ($categoria != "") {
+        $mensaje = "Bienvenido al curso: " . $curso . " de la categoria: " . $categoria;
+    }else {
+        "Bienvenido al curso: " . $curso;
+    }
+
+    return $mensaje;
+});
+*/
